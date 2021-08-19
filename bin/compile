@@ -2,7 +2,8 @@
 # The actual compilation code lives in `bin/support/ruby_compile`. This file instead
 # bootstraps the ruby needed and then executes `bin/support/ruby_compile`
 
-BUILD_DIR=$1
+ROOT_DIR=$1
+BUILD_DIR="$1/server"
 CACHE_DIR=$2
 ENV_DIR=$3
 BIN_DIR=$(cd $(dirname $0); pwd)
@@ -28,4 +29,8 @@ EOM
   compile_buildpack_v2 "$BUILD_DIR" "$CACHE_DIR" "$ENV_DIR" "https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/jvm.tgz" "heroku/jvm"
 fi
 
-$heroku_buildpack_ruby_dir/bin/ruby $BIN_DIR/support/ruby_compile $@
+$heroku_buildpack_ruby_dir/bin/ruby $BIN_DIR/support/ruby_compile "$BUILD_DIR" "$CACHE_DIR" "$ENV_DIR"
+
+# Copy .profile.d to the root folder
+mkdir -p $ROOT_DIR/.profile.d
+cp -r $BUILD_DIR/.profile.d/* $ROOT_DIR/.profile.d/

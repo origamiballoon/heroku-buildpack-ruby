@@ -2,13 +2,13 @@
 
 if [ -z "$CNB_STACK_ID" ]; then
   # v2 API
-  APP_DIR=$1
+  APP_DIR="$1/server"
 else
   PLATFORM_DIR=$1
   PLAN=$2
   # working is the cwd now
   # v3 API
-  APP_DIR=$(pwd)
+  APP_DIR="$(pwd)/server"
 fi
 
 if [ -f "$APP_DIR/Gemfile" ]; then

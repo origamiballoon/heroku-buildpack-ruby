@@ -114,7 +114,7 @@ WARNING
       config_detect
       best_practice_warnings
       warn_outdated_ruby
-      setup_profiled(ruby_layer_path: "$HOME", gem_layer_path: "$HOME") # $HOME is set to /app at run time
+      setup_profiled(ruby_layer_path: "$HOME/server", gem_layer_path: "$HOME/server") # $HOME is set to /app at run time
       setup_export
       cleanup
       super
@@ -401,7 +401,7 @@ EOF
       elsif has_yarn_binary?
         profiled_path << "#{ruby_layer_path}/vendor/#{@yarn_installer.binary_path}"
       end
-      profiled_path << "$HOME/bin" # /app in production
+      profiled_path << "$HOME/server/bin" # /app in production
       profiled_path << "#{gem_layer_path}/#{bundler_binstubs_path}" # Binstubs from bundler, eg. vendor/bundle/bin
       profiled_path << "#{gem_layer_path}/#{slug_vendor_base}/bin"  # Binstubs from rubygems, eg. vendor/bundle/ruby/2.6.0/bin
       profiled_path << "$PATH"
@@ -831,7 +831,7 @@ BUNDLE
 
           # we need to set BUNDLE_CONFIG and BUNDLE_GEMFILE for
           # codon since it uses bundler.
-         env_vars["BUNDLE_GEMFILE"] = "#{pwd}/Gemfile"
+          env_vars["BUNDLE_GEMFILE"] = "#{pwd}/Gemfile"
           env_vars["BUNDLE_CONFIG"] = "#{pwd}/.bundle/config"
           env_vars["CPATH"] = noshellescape("#{yaml_include}:$CPATH")
           env_vars["CPPATH"] = noshellescape("#{yaml_include}:$CPPATH")

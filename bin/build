@@ -4,11 +4,11 @@ LAYERS_DIR=$1
 PLATFORM_DIR=$2
 ENV_DIR="$PLATFORM_DIR/env"
 PLAN=$3
-APP_DIR=$(pwd)
+APP_DIR="$(pwd)/server"
 BIN_DIR=$(cd $(dirname $0); pwd)
 BUILDPACK_DIR=$(dirname $BIN_DIR)
 
-# legacy buildpack uses $STACK 
+# legacy buildpack uses $STACK
 export STACK=$CNB_STACK_ID
 
 source "$BIN_DIR/support/bash_functions.sh"

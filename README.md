@@ -1,9 +1,14 @@
 # Heroku Buildpack for Ruby
+
 ![ruby](https://cloud.githubusercontent.com/assets/51578/13712725/3c6b3368-e793-11e5-83c1-728440111358.png)
 
 This is a [Heroku Buildpack](http://devcenter.heroku.com/articles/buildpacks) for Ruby, Rack, and Rails apps. It uses [Bundler](https://bundler.io) for dependency management.
 
 This buildpack requires 64-bit Linux.
+
+## Fork
+
+This fork runs the Ruby buildpack over the `server/` subdirectory without needing to delete the rest of the folder structure. Binaries and Gems are still downloaded into the `server/vendor` folder, paths are updated with the subdirectory. `server/Procfile` is needed to pass the Buildpack check, but is not used (unless you are using a multi procfile Buildpack).
 
 ## Usage
 
@@ -46,7 +51,7 @@ For more information about using Ruby and buildpacks on Heroku, see these Dev Ce
 
 ## Hacking
 
-To use this buildpack, fork it on Github.  Push up changes to your fork, then create a test app with `--buildpack <your-github-url>` and push to it.
+To use this buildpack, fork it on Github. Push up changes to your fork, then create a test app with `--buildpack <your-github-url>` and push to it.
 
 ### Testing
 
